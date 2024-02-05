@@ -117,7 +117,7 @@ const LandingPage = () => {
               {selectedBox === boxIndex ? (
                 <Stack
                   direction={'column'}
-                  style={{ position: 'absolute', zIndex: 0 }}
+                  style={{ position: 'relative', zIndex: 0 }}
                   spacing={3}
                 >
                   <Box
@@ -132,10 +132,13 @@ const LandingPage = () => {
                       transition: 'opacity 0.3s',
                       color: 'black',
                       paddingLeft: '48px',
-                      paddingTop: '33.5px',
+                      paddingRight: '48px',
+                      paddingTop: '80px',
                     }}
                   >
-                    <AboutMeSlide />
+                    {boxIndex === 1 && <AboutMeSlide />}
+                    {boxIndex === 2 && <AboutMeSlide />}
+                    {boxIndex === 3 && <AboutMeSlide />}
                   </Box>
                 </Stack>
               ) : null}

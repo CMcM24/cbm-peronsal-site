@@ -1,9 +1,7 @@
 'use client';
-import Image from 'next/image';
-import styles from './page.module.css';
 import LandingPage from '@/Pages/LandingPage/LandingPage';
-import { ThemeProvider } from '@mui/material';
 import MyTheme from '@/Theme';
+import { ThemeProvider } from '@mui/material';
 
 export default function Home() {
   return (
