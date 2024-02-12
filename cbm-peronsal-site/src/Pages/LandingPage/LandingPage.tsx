@@ -9,6 +9,8 @@ const LandingPage = () => {
   const [selectedBox, setSelectedBox] = useState<number>(0);
   const [hoveredBox, setHoveredBox] = useState<number>(0);
 
+  const bgPosition = ['left', 'center', 'right'];
+
   return (
     <>
       <Box
@@ -70,7 +72,7 @@ const LandingPage = () => {
             >
               <Box
                 style={{
-                  zIndex: 1,
+                  zIndex: -1,
                   position: 'absolute',
                   top: 0,
                   left: 0,
@@ -83,8 +85,9 @@ const LandingPage = () => {
                   opacity: selectedBox === boxIndex ? 0.4 : 0,
                   transition: 'opacity 0.3s, background-size 0.3s',
                 }}
-              >
-                {selectedBox === boxIndex ? (
+              ></Box>
+              {selectedBox === boxIndex ? (
+                <>
                   <Stack
                     direction={'column'}
                     style={{ position: 'absolute', zIndex: 0 }}
@@ -110,37 +113,31 @@ const LandingPage = () => {
                       </Button>
                     </Typography>
                   </Stack>
-                ) : (
-                  <></>
-                )}
-              </Box>
-              {selectedBox === boxIndex ? (
-                <Stack
-                  direction={'column'}
-                  style={{ position: 'relative', zIndex: 0 }}
-                  spacing={3}
-                >
-                  <Box
-                    style={{
-                      zIndex: 0,
-                      position: 'absolute',
-                      top: 0,
-                      left: 0,
-                      width: '100%',
-                      height: '100%',
-                      opacity: selectedBox === boxIndex ? 1 : 0,
-                      transition: 'opacity 0.3s',
-                      color: 'black',
-                      paddingLeft: '48px',
-                      paddingRight: '48px',
-                      paddingTop: '80px',
-                    }}
+                  <Stack
+                    direction={'column'}
+                    style={{ position: 'relative', zIndex: -1, opacity: 1 }}
+                    spacing={3}
                   >
-                    {boxIndex === 1 && <AboutMeSlide />}
-                    {boxIndex === 2 && <AboutMeSlide />}
-                    {boxIndex === 3 && <AboutMeSlide />}
-                  </Box>
-                </Stack>
+                    <Box
+                      style={{
+                        zIndex: 0,
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100%',
+                        opacity: 1,
+                        paddingLeft: '48px',
+                        paddingRight: '48px',
+                        paddingTop: '80px',
+                      }}
+                    >
+                      {boxIndex === 1 && <AboutMeSlide />}
+                      {boxIndex === 2 && <AboutMeSlide />}
+                      {boxIndex === 3 && <AboutMeSlide />}
+                    </Box>
+                  </Stack>
+                </>
               ) : null}
             </Box>
           ))}
@@ -151,6 +148,3 @@ const LandingPage = () => {
 };
 
 export default LandingPage;
-
-const bgPosition = ['left', 'center', 'right'];
-const slideContent = [<AboutMeSlide key={1} />, <></>, <></>];
