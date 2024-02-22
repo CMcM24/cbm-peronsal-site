@@ -3,30 +3,25 @@ import { useState } from 'react';
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
 import logo from '../../images/logo.png';
 import Image from 'next/image';
-import AboutMeSlide from '@/Components/AboutMeSlide/AboutMeSlide';
+import AboutMeSlide from '@/Components/Slides/AboutMeSlide';
+import './index.css';
+import PortfolioSlide from '@/Components/Slides/PortfolioSlide';
+import ContactSlide from '@/Components/Slides/ContactSlide';
 
 const LandingPage = () => {
   const [selectedBox, setSelectedBox] = useState<number>(0);
   const [hoveredBox, setHoveredBox] = useState<number>(0);
 
   const bgPosition = ['left', 'center', 'right'];
+  const slideTitles = ['About Me', 'Portfolio', 'Contact'];
 
   return (
     <>
-      <Box
-        style={{
-          width: '100vw',
-          height: '100vh',
-          backgroundColor: 'rgba(88, 72, 148, 1)',
-          zIndex: 2,
-        }}
-      >
+      <Box className="landingPageBox">
         <Typography
           variant="h3"
+          className="logoTitle"
           style={{
-            color: 'white',
-            position: 'absolute',
-            transition: 'opacity 0.3s',
             opacity: !selectedBox ? 1 : 0,
           }}
         >
@@ -71,19 +66,13 @@ const LandingPage = () => {
               }}
             >
               <Box
+                className="backgroundImage"
                 style={{
                   zIndex: -1,
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  width: '100%',
-                  height: '100%',
-                  backgroundImage: `url("https://static.vecteezy.com/system/resources/previews/007/632/073/large_2x/dots-mesh-wave-digital-background-illustration-vector.jpg")`,
                   backgroundSize:
                     selectedBox === boxIndex ? '200% 100%' : '1000% 100%',
                   backgroundPosition: bgPosition[boxIndex - 1],
                   opacity: selectedBox === boxIndex ? 0.4 : 0,
-                  transition: 'opacity 0.3s, background-size 0.3s',
                 }}
               ></Box>
               {selectedBox === boxIndex ? (
@@ -105,6 +94,11 @@ const LandingPage = () => {
                         variant="text"
                         color="black"
                         onClick={() => setSelectedBox(0)}
+                        style={{
+                          color: ['#2082a6', '#2082a6', '#3afca5'][
+                            boxIndex - 1
+                          ],
+                        }}
                       >
                         <ArrowBackIosNewRoundedIcon
                           style={{ cursor: 'pointer' }}
@@ -118,27 +112,33 @@ const LandingPage = () => {
                     style={{ position: 'relative', zIndex: -1, opacity: 1 }}
                     spacing={3}
                   >
-                    <Box
-                      style={{
-                        zIndex: 0,
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        width: '100%',
-                        height: '100%',
-                        opacity: 1,
-                        paddingLeft: '48px',
-                        paddingRight: '48px',
-                        paddingTop: '80px',
-                      }}
-                    >
+                    <Box className={'slideBox'}>
                       {boxIndex === 1 && <AboutMeSlide />}
-                      {boxIndex === 2 && <AboutMeSlide />}
-                      {boxIndex === 3 && <AboutMeSlide />}
+                      {boxIndex === 2 && <PortfolioSlide />}
+                      {boxIndex === 3 && <ContactSlide />}
                     </Box>
                   </Stack>
                 </>
-              ) : null}
+              ) : (
+                <Stack direction={'column'} className="slideTitleStack">
+                  {slideTitles[boxIndex - 1].split('').map((char) => {
+                    return (
+                      <>
+                        <div
+                          style={{
+                            color: ['#2082a6', '#3afca5', '#01cbae'][
+                              boxIndex - 1
+                            ],
+                          }}
+                        >
+                          {char.toUpperCase()}
+                        </div>
+                        <br />
+                      </>
+                    );
+                  })}
+                </Stack>
+              )}
             </Box>
           ))}
         </Stack>
