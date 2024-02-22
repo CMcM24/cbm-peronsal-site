@@ -1,5 +1,5 @@
 import { Box, Button, Stack, Typography } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
 import logo from '../../images/logo.png';
 import Image from 'next/image';
@@ -7,6 +7,7 @@ import AboutMeSlide from '@/Components/Slides/AboutMeSlide';
 import './index.css';
 import PortfolioSlide from '@/Components/Slides/PortfolioSlide';
 import ContactSlide from '@/Components/Slides/ContactSlide';
+import useScreenSize from '@/Theme/useScreenSize';
 
 const LandingPage = () => {
   const [selectedBox, setSelectedBox] = useState<number>(0);
@@ -14,6 +15,7 @@ const LandingPage = () => {
 
   const bgPosition = ['left', 'center', 'right'];
   const slideTitles = ['About Me', 'Portfolio', 'Contact'];
+  const { isXS, isSM, isMD, isLG, isXL } = useScreenSize();
 
   return (
     <>
