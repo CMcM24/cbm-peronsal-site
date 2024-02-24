@@ -1,13 +1,14 @@
-import { Box, Button, Stack, Typography } from '@mui/material';
-import { useEffect, useState } from 'react';
-import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
-import logo from '../../images/logo.png';
-import Image from 'next/image';
 import AboutMeSlide from '@/Components/Slides/AboutMeSlide';
-import './index.css';
-import PortfolioSlide from '@/Components/Slides/PortfolioSlide';
 import ContactSlide from '@/Components/Slides/ContactSlide';
+import PortfolioSlide from '@/Components/Slides/PortfolioSlide';
+import { MyColors } from '@/Theme/themeUtilities';
 import useScreenSize from '@/Theme/useScreenSize';
+import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
+import { Box, Button, Stack, Typography } from '@mui/material';
+import Image from 'next/image';
+import { useState } from 'react';
+import logo from '../../images/logo.png';
+import './index.css';
 
 const LandingPage = () => {
   const [selectedBox, setSelectedBox] = useState<number>(0);
@@ -15,8 +16,22 @@ const LandingPage = () => {
 
   const bgPosition = ['left', 'center', 'right'];
   const slideTitles = ['About Me', 'Portfolio', 'Contact'];
-  const { isXS, isSM, isMD, isLG, isXL } = useScreenSize();
+  const { isXS, isSM, screensize } = useScreenSize();
 
+  const defaultWidthMap = {
+    isXS: '30%',
+    isSM: '20%',
+    isMD: '5%',
+    isLG: '5%',
+    isXL: '5%',
+  };
+  const hoveredWidthMap = {
+    isXS: '200%',
+    isSM: '200%',
+    isMD: '7.5%',
+    isLG: '7.5%',
+    isXL: '7.5%',
+  };
   return (
     <>
       <Box className="landingPageBox">
@@ -31,7 +46,7 @@ const LandingPage = () => {
         </Typography>
         <Stack
           direction={'row'}
-          spacing={20}
+          spacing={isXS || isSM ? 5 : 20}
           justifyContent="center"
           alignItems="center"
           style={{ height: '100%' }}
@@ -52,10 +67,12 @@ const LandingPage = () => {
                 height: '100%',
                 width:
                   selectedBox === boxIndex
-                    ? '60%'
+                    ? isXS || isSM
+                      ? '300%'
+                      : '60%'
                     : hoveredBox === boxIndex
-                    ? '7.5%'
-                    : '5%',
+                    ? hoveredWidthMap[screensize]
+                    : defaultWidthMap[screensize],
                 backgroundColor: ['#3afca5', '#01cbae', '#2082a6'][
                   boxIndex - 1
                 ],
@@ -88,8 +105,8 @@ const LandingPage = () => {
                       variant="h3"
                       style={{
                         color: 'black',
-                        paddingLeft: '24px',
-                        paddingTop: '12px',
+                        paddingLeft: isXS || isSM ? '6px' : '24px',
+                        paddingTop: isXS || isSM ? '3px' : '12px',
                       }}
                     >
                       <Button
@@ -97,9 +114,11 @@ const LandingPage = () => {
                         color="black"
                         onClick={() => setSelectedBox(0)}
                         style={{
-                          color: ['#2082a6', '#2082a6', '#3afca5'][
-                            boxIndex - 1
-                          ],
+                          color: [
+                            MyColors.darkGreen,
+                            MyColors.lightGreen,
+                            MyColors.mediumGreen,
+                          ][boxIndex - 1],
                         }}
                       >
                         <ArrowBackIosNewRoundedIcon
