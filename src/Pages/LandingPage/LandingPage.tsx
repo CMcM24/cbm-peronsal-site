@@ -39,18 +39,32 @@ const LandingPage = () => {
         return '200% 100%';
     }
   };
+  const getSpacing = () => {
+    switch (screensize) {
+      case 'isXS':
+        return 5;
+      case 'isSM':
+        return 5;
+      case 'isMD':
+        return 8;
+      case 'isLG':
+        return 15;
+      case 'isXL':
+        return 20;
+    }
+  };
 
   const defaultWidthMap = {
     isXS: '30%',
     isSM: '20%',
-    isMD: '5%',
-    isLG: '5%',
+    isMD: '15%',
+    isLG: '10%',
     isXL: '5%',
   };
   const hoveredWidthMap = {
     isXS: '200%',
     isSM: '200%',
-    isMD: '7.5%',
+    isMD: '15%',
     isLG: '7.5%',
     isXL: '7.5%',
   };
@@ -69,7 +83,7 @@ const LandingPage = () => {
         </Typography>
         <Stack
           direction={'row'}
-          spacing={isXS || isSM ? 5 : 20}
+          spacing={getSpacing()}
           justifyContent="center"
           alignItems="center"
           style={{ height: '100%' }}
@@ -90,7 +104,7 @@ const LandingPage = () => {
                 height: '100%',
                 width:
                   selectedBox === boxIndex
-                    ? isXS || isSM
+                    ? checkIfSmaller('isMD')
                       ? '300%'
                       : '60%'
                     : hoveredBox === boxIndex
