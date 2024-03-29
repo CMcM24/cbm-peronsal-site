@@ -2,7 +2,7 @@ import { Box, Stack, Typography } from '@mui/material';
 import { ReactNode, useEffect, useState } from 'react';
 import './index.css';
 
-const MySlide = ({
+const SlideCard = ({
   title,
   body,
 }: {
@@ -16,10 +16,10 @@ const MySlide = ({
   }, []);
   return (
     <>
-      <Typography variant="h3" className="aboutMeTitle">
+      <Typography variant="h3" className="slideCardTitle">
         {title}
       </Typography>
-      <Box className="aboutMeBox">
+      <Box className="slideCardBox">
         <Stack direction="row">
           <Typography variant="body1">{body}</Typography>
         </Stack>
@@ -27,4 +27,4 @@ const MySlide = ({
     </>
   );
 };
-export default MySlide;
+export default SlideCard;

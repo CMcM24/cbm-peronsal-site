@@ -16,7 +16,29 @@ const LandingPage = () => {
 
   const bgPosition = ['left', 'center', 'right'];
   const slideTitles = ['About Me', 'Portfolio', 'Contact'];
-  const { isXS, isSM, screensize } = useScreenSize();
+  const { isXS, isSM, screensize, checkIfSmaller } = useScreenSize();
+
+  const closeDropFocus = () => {
+    setSelectedBox(0);
+    setHoveredBox(0);
+    document.activeElement instanceof HTMLElement &&
+      document.activeElement.blur();
+  };
+
+  const getBackgroundImgSize = () => {
+    switch (screensize) {
+      case 'isXS':
+        return '750% 100%';
+      case 'isSM':
+        return '600% 100%';
+      case 'isMD':
+        return '500% 100%';
+      case 'isLG':
+        return '300% 100%';
+      case 'isXL':
+        return '200% 100%';
+    }
+  };
 
   const defaultWidthMap = {
     isXS: '30%',
@@ -32,6 +54,7 @@ const LandingPage = () => {
     isLG: '7.5%',
     isXL: '7.5%',
   };
+
   return (
     <>
       <Box className="landingPageBox">
@@ -73,10 +96,12 @@ const LandingPage = () => {
                     : hoveredBox === boxIndex
                     ? hoveredWidthMap[screensize]
                     : defaultWidthMap[screensize],
-                backgroundColor: ['#3afca5', '#01cbae', '#2082a6'][
-                  boxIndex - 1
-                ],
-                boxShadow: '5px 0 40px #5f2a84, -5px 0 40px #5f2a84',
+                backgroundColor: [
+                  MyColors.lightGreen,
+                  MyColors.mediumGreen,
+                  MyColors.darkGreen,
+                ][boxIndex - 1],
+                boxShadow: `5px 0 40px ${MyColors.richPurple}, -5px 0 40px ${MyColors.richPurple}`,
                 transition: 'width 0.3s, opacity 0.3s',
                 transform: 'scaleX(1)',
                 opacity: 1,
@@ -89,7 +114,9 @@ const LandingPage = () => {
                 style={{
                   zIndex: -1,
                   backgroundSize:
-                    selectedBox === boxIndex ? '200% 100%' : '1000% 100%',
+                    selectedBox === boxIndex
+                      ? getBackgroundImgSize()
+                      : '1000% 100%',
                   backgroundPosition: bgPosition[boxIndex - 1],
                   opacity: selectedBox === boxIndex ? 0.4 : 0,
                 }}
@@ -112,13 +139,11 @@ const LandingPage = () => {
                       <Button
                         variant="text"
                         color="black"
-                        onClick={() => setSelectedBox(0)}
+                        onClick={closeDropFocus}
                         style={{
-                          color: [
-                            MyColors.darkGreen,
-                            MyColors.lightGreen,
-                            MyColors.mediumGreen,
-                          ][boxIndex - 1],
+                          color: MyColors.richPurple,
+                          fontWeight: 700,
+                          opacity: 1,
                         }}
                       >
                         <ArrowBackIosNewRoundedIcon
@@ -147,9 +172,11 @@ const LandingPage = () => {
                       <>
                         <div
                           style={{
-                            color: ['#2082a6', '#3afca5', '#01cbae'][
-                              boxIndex - 1
-                            ],
+                            color: [
+                              MyColors.darkGreen,
+                              MyColors.lightGreen,
+                              MyColors.mediumGreen,
+                            ][boxIndex - 1],
                           }}
                         >
                           {char.toUpperCase()}

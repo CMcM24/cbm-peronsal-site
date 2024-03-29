@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import MySlide from './MySlide';
+import SlideCard from './SlideCard';
 import './index.css';
 
 const PortfolioSlide = () => {
@@ -8,6 +8,6 @@ const PortfolioSlide = () => {
     setFadeIn(true);
     return setFadeIn(false);
   }, []);
-  return <MySlide title="Portfolio" body={<div></div>} />;
+  return <SlideCard title="Portfolio" body={<div></div>} />;
 };
 export default PortfolioSlide;

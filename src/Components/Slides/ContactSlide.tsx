@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import MySlide from './MySlide';
+import SlideCard from './SlideCard';
 import './index.css';
 
 const ContactSlide = () => {
@@ -8,6 +8,6 @@ const ContactSlide = () => {
     setFadeIn(true);
     return setFadeIn(false);
   }, []);
-  return <MySlide title="Contact Me" body={<div></div>} />;
+  return <SlideCard title="Contact Me" body={<div></div>} />;
 };
 export default ContactSlide;

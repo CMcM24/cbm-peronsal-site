@@ -1,10 +1,10 @@
-.aboutMeTitle {
+.slideCardTitle {
   padding-bottom: 16px;
   color: rgba(95, 42, 132);
   transition: opacity 0.3s;
 }
 
-.aboutMeBox {
+.slideCardBox {
   position: relative;
   padding: 16px;
   border-radius: 5px;
@@ -15,7 +15,7 @@
   font-size: 24px;
 }
 
-.aboutMeImage {
+.slideCardImage {
   margin-right: 16px;
   float: left;
   max-width: 200px;

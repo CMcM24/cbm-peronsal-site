@@ -16,6 +16,7 @@ const useScreenSize = () => {
     isLG: useMediaQuery(MyTheme.breakpoints.between(1200, 1500)),
     isXL: useMediaQuery(MyTheme.breakpoints.between(1500, 9999)),
   };
+
   const determineSize = (obj: tSizeQuery) => {
     for (const [key, value] of Object.entries(obj)) {
       if (value) {
@@ -24,9 +25,20 @@ const useScreenSize = () => {
     }
     return 'isXL';
   };
+
+  const checkIfSmaller = (size: 'isMD' | 'isLG' | 'isXL') => {
+    const indexOfCurrent = Object.keys(sizeQueries).indexOf(
+      determineSize(sizeQueries)
+    );
+    const indexOfLimit = Object.keys(sizeQueries).indexOf(size);
+    if (indexOfCurrent < indexOfLimit) return true;
+    return false;
+  };
+
   return {
     ...sizeQueries,
     screensize: determineSize(sizeQueries),
+    checkIfSmaller,
   };
 };
 

@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import prolfilePhoto from '../../images/wedding1.jpg';
 import Image from 'next/image';
 import './index.css';
-import MySlide from './MySlide';
+import SlideCard from './SlideCard';
 
 const AboutMeSlide = () => {
   const [fadeIn, setFadeIn] = useState(false);
@@ -12,14 +12,14 @@ const AboutMeSlide = () => {
     return setFadeIn(false);
   }, []);
   return (
-    <MySlide
+    <SlideCard
       title="About Me"
       body={
         <div>
           <Image
             src={prolfilePhoto}
             alt="profile_image"
-            className="aboutMeImage"
+            className="slideCardImage"
           />
           My name is Colin McMahon. I grew up in central Jersey. In 2010 I set
           off to college and attended Norwich University up in Northfield, VT.
