@@ -4,9 +4,11 @@ import prolfilePhoto from '../../images/wedding1.jpg';
 import Image from 'next/image';
 import './index.css';
 import SlideCard from './SlideCard';
+import useScreenSize from '@/Theme/useScreenSize';
 
 const AboutMeSlide = () => {
   const [fadeIn, setFadeIn] = useState(false);
+  const { isXS } = useScreenSize();
   useEffect(() => {
     setFadeIn(true);
     return setFadeIn(false);
@@ -20,7 +22,9 @@ const AboutMeSlide = () => {
             src={prolfilePhoto}
             alt="profile_image"
             className="slideCardImage"
+            style={isXS ? { float: 'none' } : {}}
           />
+          {isXS && <br />}
           My name is Colin McMahon. I grew up in central Jersey. In 2010 I set
           off to college and attended Norwich University up in Northfield, VT.
           There I tool part in their Corps of Cadet program, where I lived a

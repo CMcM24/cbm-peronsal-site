@@ -18,6 +18,7 @@
 .slideCardImage {
   margin-right: 16px;
   float: left;
+  width: 100%;
   max-width: 200px;
   height: auto;
 }

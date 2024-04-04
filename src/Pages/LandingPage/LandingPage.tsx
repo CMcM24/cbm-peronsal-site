@@ -9,6 +9,8 @@ import Image from 'next/image';
 import { useState } from 'react';
 import logo from '../../images/logo.png';
 import './index.css';
+import LogoImg from '@/Components/LogoImg/LogoImg';
+import MobileBar from '@/Components/MobileBar/MobileBar';
 
 const LandingPage = () => {
   const [selectedBox, setSelectedBox] = useState<number>(0);
@@ -42,7 +44,7 @@ const LandingPage = () => {
   const getSpacing = () => {
     switch (screensize) {
       case 'isXS':
-        return 5;
+        return 3;
       case 'isSM':
         return 5;
       case 'isMD':
@@ -72,15 +74,8 @@ const LandingPage = () => {
   return (
     <>
       <Box className="landingPageBox">
-        <Typography
-          variant="h3"
-          className="logoTitle"
-          style={{
-            opacity: !selectedBox ? 1 : 0,
-          }}
-        >
-          <Image src={logo} alt="logo_image" width={200} height={200} />
-        </Typography>
+        <LogoImg isRendered={selectedBox} />
+        <MobileBar />
         <Stack
           direction={'row'}
           spacing={getSpacing()}
@@ -105,7 +100,9 @@ const LandingPage = () => {
                 width:
                   selectedBox === boxIndex
                     ? checkIfSmaller('isMD')
-                      ? '300%'
+                      ? isXS
+                        ? '800%'
+                        : '300%'
                       : '60%'
                     : hoveredBox === boxIndex
                     ? hoveredWidthMap[screensize]
@@ -172,7 +169,14 @@ const LandingPage = () => {
                     style={{ position: 'relative', zIndex: -1, opacity: 1 }}
                     spacing={3}
                   >
-                    <Box className={'slideBox'}>
+                    <Box
+                      className={'slideBox'}
+                      style={
+                        checkIfSmaller('isMD')
+                          ? { paddingLeft: 16, paddingRight: 16 }
+                          : {}
+                      }
+                    >
                       {boxIndex === 1 && <AboutMeSlide />}
                       {boxIndex === 2 && <PortfolioSlide />}
                       {boxIndex === 3 && <ContactSlide />}
